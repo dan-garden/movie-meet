@@ -2,7 +2,7 @@
   "name": "movie-meet",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./server/start.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/dan-garden/movie-meet#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "node-fetch": "^2.6.0"
   }
 }

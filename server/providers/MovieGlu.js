@@ -1,6 +1,5 @@
 const MovieProvider = require("./MovieProvider.js");
 
-
 class MovieGlu extends MovieProvider {
     static get credentials() {
         return {
@@ -17,7 +16,7 @@ class MovieGlu extends MovieProvider {
     }
 
 
-    static async getNowShowing(config={}) {
+    static async getFilmsNowShowing(config={}) {
         if(!config.country) {
             throw new Error("No country code set");
         }
@@ -33,6 +32,32 @@ class MovieGlu extends MovieProvider {
         
         const count = config.count ? config.count : 10;
         const endpoint = `filmsNowShowing/?n=${count}`;
+
+        return this.getData(this.url + endpoint, {
+            ...this.credentials,
+            "territory": config.country,
+            "device-datetime": this.getTime(),
+            "geolocation": `${config.lat}:${config.long}`
+        })
+    }
+
+
+    static async getCinemasNearby(config={}) {
+        if(!config.country) {
+            throw new Error("No country code set");
+        }
+
+        if(!config.lat) {
+            throw new Error("No latitude set");
+        }
+
+        if(!config.long) {
+            throw new Error("No longitude set");
+        }
+        
+        
+        const count = config.count ? config.count : 10;
+        const endpoint = `cinemasNearby/?n=${count}`;
 
         return this.getData(this.url + endpoint, {
             ...this.credentials,
