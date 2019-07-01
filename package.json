@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/dan-garden/movie-meet#readme",
   "dependencies": {
+    "crypto": "^1.0.1",
     "express": "^4.17.1",
     "node-fetch": "^2.6.0"
   }

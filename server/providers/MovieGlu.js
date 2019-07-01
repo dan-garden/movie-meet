@@ -20,24 +20,21 @@ class MovieGlu extends MovieProvider {
         if(!config.country) {
             throw new Error("No country code set");
         }
-
         if(!config.lat) {
             throw new Error("No latitude set");
         }
-
         if(!config.long) {
             throw new Error("No longitude set");
         }
         
-        
         const count = config.count ? config.count : 10;
-        const endpoint = `filmsNowShowing/?n=${count}`;
+        const endpoint = this.getEndpoint('filmsNowShowing', {n: count});
 
         return this.getData(this.url + endpoint, {
             ...this.credentials,
             "territory": config.country,
             "device-datetime": this.getTime(),
-            "geolocation": `${config.lat}:${config.long}`
+            "geolocation": `${config.lat};${config.long}`
         })
     }
 
@@ -46,24 +43,43 @@ class MovieGlu extends MovieProvider {
         if(!config.country) {
             throw new Error("No country code set");
         }
-
         if(!config.lat) {
             throw new Error("No latitude set");
         }
-
         if(!config.long) {
             throw new Error("No longitude set");
         }
-        
-        
+
         const count = config.count ? config.count : 10;
-        const endpoint = `cinemasNearby/?n=${count}`;
+        const endpoint = this.getEndpoint('cinemasNearby', {n: count});
 
         return this.getData(this.url + endpoint, {
             ...this.credentials,
             "territory": config.country,
             "device-datetime": this.getTime(),
-            "geolocation": `${config.lat}:${config.long}`
+            "geolocation": `${config.lat};${config.long}`
+        })
+    }
+
+    static async getCinemaShowTimes(config={}) {
+        if(!config.cinema_id) {
+            throw new Error("No cinema id set");
+        }
+        if(!config.date) {
+            throw new Error("No date set");
+        }
+
+        config.sort = config.sort === "popularity" ? config.sort : "alphabetical";
+        
+        const endpoint = this.getEndpoint('cinemaShowTimes', {
+            ...config
+        });
+
+        return this.getData(this.url + endpoint, {
+            ...this.credentials,
+            "territory": config.country,
+            "device-datetime": this.getTime(),
+            "geolocation": `${config.lat};${config.long}`
         })
     }
 

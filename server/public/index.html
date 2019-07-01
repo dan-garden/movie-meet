@@ -11,7 +11,14 @@
     
 
     <script>
-        
+        function testEndpoint(name) {
+            fetch("/api/"+name).then(result => result.json()).then(result => console.log(result))
+        }
+        const tests = {
+            filmsNowShowing: () => testEndpoint('filmsNowShowing'),
+            cinemasNearby: () => testEndpoint('cinemasNearby'),
+            cinemaShowTimes: () => testEndpoint('cinemaShowTimes')
+        }
     </script>
 </body>
 </html>

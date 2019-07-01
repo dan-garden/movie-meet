@@ -31,6 +31,19 @@ app.get('/api/cinemasNearby', function (req, res) {
 });
 
 
+app.get('/api/cinemaShowTimes', function (req, res) {
+    MovieGlu.getCinemaShowTimes({
+        cinema_id: 16307,
+        date: "2019-07-01",
+        film_id: 258633,
+        // sort: "popularity"
+
+    }).then(result => {
+        res.json(result);
+    });
+});
+
+
 
 
 
