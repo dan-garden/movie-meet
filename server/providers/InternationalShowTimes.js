@@ -1,18 +1,17 @@
-const MovieProviderBase = require("./MovieProviderBase.js");
+const MovieProviderBase = require("./MovieProviderBase");
 
-class MovieGlu extends MovieProviderBase {
+class InternationalShowTimes extends MovieProviderBase {
     static get credentials() {
         return {
-            "Authorization": "Basic TU9WSV80ODp4Z3F0aXZNYVJmT08=",
-            "client": "MOVI_48",
-            "x-api-key": "a7ktzir3krIua2buq4cm9NRE7PBOQDr129c23ak8",
-            "api-version": "v200",
-            "territory": "AU"
+            "X-Api-Key": "zopFVtDETtFTuhQhrZY03aOHpIrJRvGw",
+            // "api-version": "v200",
+            // "territory": "AU"
         };
     }
 
+
     static get url() {
-        return "https://api-gate2.movieglu.com/";
+        return "https://api.internationalshowtimes.com/v4/";
     }
 
     static async getFilmsNowShowing(config={}) {
@@ -24,13 +23,13 @@ class MovieGlu extends MovieProviderBase {
         }
         
         const count = config.count ? config.count : 10;
-        const endpoint = this.getEndpoint('filmsNowShowing', {n: count});
+        const endpoint = this.getEndpoint('movies', {
+            "limit": count,
+            "time_from": this.getTime(),
+            "location": `${config.lat},${config.long}`
+        });
 
-        return this.getData(this.url + endpoint, {
-            ...this.credentials,
-            "device-datetime": this.getTime(),
-            "geolocation": `${config.lat};${config.long}`
-        })
+        return this.getData(this.url + endpoint, { ...this.credentials })
     }
 
     static async getFilmsComingSoon(config={}) {        
@@ -140,5 +139,4 @@ class MovieGlu extends MovieProviderBase {
 
 }
 
-
-module.exports = MovieGlu;
+module.exports = InternationalShowTimes;

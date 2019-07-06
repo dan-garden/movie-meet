@@ -5,20 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Now Showing Movies</title>
+    <style>
+        #coming-soon {
+            list-style-type: none;
+        }
+
+        #coming-soon li {
+            display: inline-block;
+        }
+        
+    </style>
 </head>
 <body>
     
-    
+    <script>
+        // function testEndpoint(name) {
+        //     return fetch("/api/"+name).then(result => result.json());
+        // }
+
+        // const tests = [
+        //     'filmsNowShowing',
+        //     'filmsComingSoon',
+        //     'cinemasNearby',
+        //     'cinemaShowTimes'
+        // ];
+
+        // const test = {};
+        // tests.forEach(endpoint => {
+        //     test[endpoint] = () => testEndpoint(endpoint).then(result => console.log(result))
+        // });
+
+        // testEndpoint('filmsComingSoon').then(result => {
+            // const list = document.querySelector("#coming-soon");
+            // result.films.forEach(film => {
+            //     const li = document.createElement("li");
+            //     const img = document.createElement("img");
+                
+            //     let image = film.images.poster;
+            //     image = image[Object.keys(image)[0]].medium;
+
+            //     img.width = image.width;
+            //     img.height = image.height;
+            //     img.src = image.film_image;
+
+
+            //     li.append(img);
+            //     list.append(li);
+            // })
+        // })
+
+
+
+    </script>
 
     <script>
-        function testEndpoint(name) {
-            fetch("/api/"+name).then(result => result.json()).then(result => console.log(result))
-        }
-        const tests = {
-            filmsNowShowing: () => testEndpoint('filmsNowShowing'),
-            cinemasNearby: () => testEndpoint('cinemasNearby'),
-            cinemaShowTimes: () => testEndpoint('cinemaShowTimes')
-        }
+        fetch('/api/filmsNowShowing?lat=-27.894061&long=153.3817914&count=10')
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+        })
     </script>
 </body>
 </html>
