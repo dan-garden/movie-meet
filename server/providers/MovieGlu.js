@@ -138,6 +138,63 @@ class MovieGlu extends MovieProviderBase {
         })
     }
 
+
+
+
+
+
+    static get routes() {
+        return {
+            '/api/filmsNowShowing': {
+                method: 'get',
+                function: this.getFilmsNowShowing.bind(this),
+                params: ['lat', 'long', 'count'],
+                response: 'json'
+            },
+            '/api/filmsComingSoon': {
+                method: 'get',
+                function: this.getFilmsComingSoon.bind(this),
+                params: ['lat', 'long', 'count'],
+                response: 'json'
+            },
+            '/api/filmLiveSearch': {
+                method: 'get',
+                function: this.getFilmLiveSearch.bind(this),
+                params: ['query', 'count'],
+                response: 'json'
+            },
+            '/api/cinemaLiveSearch': {
+                method: 'get',
+                function: this.getCinemaLiveSearch.bind(this),
+                params: ['query', 'lat', 'long', 'count'],
+                response: 'json'
+            },
+            '/api/filmDetails': {
+                method: 'get',
+                function: this.getFilmDetails.bind(this),
+                params: ['film_id'],
+                response: 'json'
+            },
+            '/api/cinemaDetails': {
+                method: 'get',
+                function: this.getCinemaDetails.bind(this),
+                params: ['cinema_id'],
+                response: 'json'
+            },
+            '/api/cinemasNearby': {
+                method: 'get',
+                function: this.getCinemasNearby.bind(this),
+                params: ['lat', 'long', 'count'],
+                response: 'json'
+            },
+            '/api/cinemaShowTimes': {
+                method: 'get',
+                function: this.getCinemaShowTimes.bind(this),
+                params: ['cinema_id', 'date', 'film_id', 'sort'],
+                response: 'json'
+            }
+        };
+    }
 }
 
 
