@@ -45,7 +45,7 @@
                         endpointForm.method = endpoint.method;
 
                         const endpointTitle = document.createElement("h4");
-                        endpointTitle.innerText = endpoint.route;
+                        endpointTitle.innerText = endpoint.method.toUpperCase() + " - " + endpoint.route;
                         endpointForm.append(endpointTitle);
 
                         let defaultVals = {};
@@ -98,6 +98,28 @@
                                     .then(result => {
                                         endpoint.submitting = false;
                                         console.log(result);
+                                    })
+                                    .catch(e => {
+                                        endpoint.submitting = false;
+                                    })
+                                } else if(endpoint.method === "post") {
+                                    const body = {}
+                                    endpointInputs.forEach(input => {
+                                        body[input.placeholder] = input.value;
+                                    });
+
+                                    fetch(endpoint.route, {
+                                        method: "POST",
+                                        body: JSON.stringify(body),
+                                        headers: { "Content-Type": "application/json" }
+                                    })
+                                    .then(result => result.json())
+                                    .then(result => {
+                                        endpoint.submitting = false;
+                                        console.log(result);
+                                    })
+                                    .catch(e => {
+                                        endpoint.submitting = false;
                                     })
                                 }
                             }

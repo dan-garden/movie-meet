@@ -27,10 +27,12 @@ class Router {
             }
             globalRoutes.push(config);
             app[config.method](route, function(req, res) {
-                let funcParams = {};
+                let funcParams = { session: req.session };
                 config.params.forEach(param => {
                     if(config.method === 'get') {
                         funcParams[param] = req.query[param];
+                    } else if(config.method === 'post') {
+                        funcParams[param] = req.body[param];
                     }
                 })
                 config.function(funcParams)
