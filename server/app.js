@@ -10,6 +10,21 @@ Router.registerRoutes(app, {
     ...InternationShowTimes.routes
 });
 
+Router.registerRoutes(app, {
+    '/api/endpoints': {
+        method: 'get',
+        function: () => {
+            return new Promise(function(resolve, reject) {
+                resolve({
+                    endpoints: Router.routes.filter(r => {
+                        return r.route!=="/api/endpoints"
+                    })
+                });
+            });
+        },
+        response: 'json'
+    }
+});
 app.use('/', express.static('server/public/'))
 
 

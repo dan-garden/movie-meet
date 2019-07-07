@@ -1,7 +1,9 @@
+let globalRoutes = [];
+
 class Router {
     static handleResponse(type, res, result) {
         if(type === 'json') {
-            if(result.message) {
+            if(result.message || result.error) {
                 result.status = "error";
             } else {
                 result.status = "success";
@@ -12,9 +14,18 @@ class Router {
         }
     }
 
+    static get routes() {
+        return globalRoutes;
+    }
+
     static registerRoutes(app, routes) {
         Object.keys(routes).forEach(route => {
             const config = routes[route];
+            config.route = route;
+            if(!config.params) {
+                config.params = [];
+            }
+            globalRoutes.push(config);
             app[config.method](route, function(req, res) {
                 let funcParams = {};
                 config.params.forEach(param => {

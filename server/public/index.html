@@ -4,66 +4,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Now Showing Movies</title>
+    <title>Test API's</title>
     <style>
-        #coming-soon {
-            list-style-type: none;
+        html,body {
+            padding: 0;
+            margin: 0;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
 
-        #coming-soon li {
-            display: inline-block;
+        form {
+            padding: 10px;
+            border: solid 3px black;
+            border-top: none;
         }
+
+        input {
+            font-size: 14px;
+        }
+
+        button {
+            display: block;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
         
     </style>
 </head>
 <body>
-    
-    <script>
-        // function testEndpoint(name) {
-        //     return fetch("/api/"+name).then(result => result.json());
-        // }
-
-        // const tests = [
-        //     'filmsNowShowing',
-        //     'filmsComingSoon',
-        //     'cinemasNearby',
-        //     'cinemaShowTimes'
-        // ];
-
-        // const test = {};
-        // tests.forEach(endpoint => {
-        //     test[endpoint] = () => testEndpoint(endpoint).then(result => console.log(result))
-        // });
-
-        // testEndpoint('filmsComingSoon').then(result => {
-            // const list = document.querySelector("#coming-soon");
-            // result.films.forEach(film => {
-            //     const li = document.createElement("li");
-            //     const img = document.createElement("img");
-                
-            //     let image = film.images.poster;
-            //     image = image[Object.keys(image)[0]].medium;
-
-            //     img.width = image.width;
-            //     img.height = image.height;
-            //     img.src = image.film_image;
-
-
-            //     li.append(img);
-            //     list.append(li);
-            // })
-        // })
-
-
-
-    </script>
+    <section id="endpoints"></section>
 
     <script>
-        fetch('/api/filmsNowShowing?lat=-27.894061&long=153.3817914&count=10')
-        .then(response => response.json())
-        .then(result => {
-            console.log(result);
-        })
+        const endpointsList = document.querySelector("#endpoints");
+        fetch('/api/endpoints')
+            .then(result => result.json())
+            .then(result => {
+                if(result.status === "success") {
+                    result.endpoints.reverse().forEach(endpoint => {
+                        const endpointForm = document.createElement("form");
+                        endpointForm.method = endpoint.method;
+
+                        const endpointTitle = document.createElement("h4");
+                        endpointTitle.innerText = endpoint.route;
+                        endpointForm.append(endpointTitle);
+
+                        let defaultVals = {};
+                        if(localStorage[endpoint.route]) {
+                            defaultVals = JSON.parse(localStorage[endpoint.route]);
+                        }
+
+                        const endpointInputs = [];
+
+                        endpoint.params.forEach(param => {
+                            const paramInput = document.createElement("input");
+                            paramInput.placeholder = param;
+
+                            if(defaultVals[param]) {
+                                paramInput.value = defaultVals[param];
+                            }
+
+                            endpointInputs.push(paramInput);
+                        })
+
+                        endpointInputs.forEach(input => {
+                            endpointForm.append(input);
+                        })
+
+                        const endpointSubmit = document.createElement("button");
+                        endpointSubmit.innerText = "Submit";
+                        endpointForm.append(endpointSubmit);
+
+                        endpointForm.addEventListener("submit", e => {
+                            e.preventDefault();
+                            if(!endpoint.submitting) {
+                                endpoint.submitting = true;
+                                console.log("Submitting "+endpoint.route);
+
+                                endpointInputs.forEach(input => {
+                                    defaultVals[input.placeholder] = input.value;
+                                })
+
+                                localStorage.setItem(endpoint.route, JSON.stringify(defaultVals));
+
+
+                                if(endpoint.method === "get") {
+                                    const body = new URLSearchParams();
+                                    endpointInputs.forEach(input => {
+                                        body.append(input.placeholder, input.value);
+                                    });
+                                    const url = `${endpoint.route}?${body.toString()}`;
+                                    fetch(url)
+                                    .then(result => result.json())
+                                    .then(result => {
+                                        endpoint.submitting = false;
+                                        console.log(result);
+                                    })
+                                }
+                            }
+                        });
+                        
+                        endpointsList.append(endpointForm);
+                    })
+                }
+            })
     </script>
 </body>
 </html>

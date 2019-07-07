@@ -23,7 +23,9 @@ class MovieProviderBase {
         const search = new URLSearchParams();
         Object.keys(query).forEach(key => {
             let val = query[key];
-            search.append(key, val);
+            if(val!=undefined && val.toString().trim() != "") {
+                search.append(key, val);
+            }
         });
 
         return `${endpoint}?${search.toString()}`;

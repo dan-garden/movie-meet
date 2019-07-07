@@ -138,11 +138,6 @@ class MovieGlu extends MovieProviderBase {
         })
     }
 
-
-
-
-
-
     static get routes() {
         return {
             '/api/filmsNowShowing': {
