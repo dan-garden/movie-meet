@@ -20,6 +20,9 @@ class MovieProviderBase {
     }
 
     static getEndpoint(endpoint, query) {
+        if(!query) {
+            return endpoint;
+        }
         const search = new URLSearchParams();
         Object.keys(query).forEach(key => {
             let val = query[key];

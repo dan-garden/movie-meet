@@ -11,6 +11,28 @@ class InternationalShowTimes extends MovieProviderBase {
         return "https://api.internationalshowtimes.com/v4/";
     }
 
+    static async getLocales() {
+        const endpoint = this.getEndpoint('locales');
+        return this.getData(this.url + endpoint, {  ...this.credentials })
+    }
+
+    static async getCountries() {
+        const endpoint = this.getEndpoint('countries');
+        return this.getData(this.url + endpoint, {  ...this.credentials })
+    }
+
+    static async getCities(config={}) {
+
+    }
+
+    static async getCinemas(config={}) {
+
+    }
+
+    static async getChains(config={}) {
+
+    }
+
     static async getMovies(config={}) {
         const params = {
             search_query: config.search_query,
@@ -38,8 +60,22 @@ class InternationalShowTimes extends MovieProviderBase {
         return this.getData(this.url + endpoint, { ...this.credentials })
     }
 
+    static async getGenres(config={}) {
+
+    }
+
     static get routes() {
         return {
+            '/api/locales': {
+                method: 'get',
+                function: this.getLocales.bind(this),
+                response: 'json'
+            },
+            '/api/countries': {
+                method: 'get',
+                function: this.getCountries.bind(this),
+                response: 'json'
+            },
             '/api/movies': {
                 method: 'get',
                 function: this.getMovies.bind(this),
@@ -66,7 +102,7 @@ class InternationalShowTimes extends MovieProviderBase {
                     'genre_ids'
                 ],
                 response: 'json'
-            }
+            },    
         };
     }
 }
