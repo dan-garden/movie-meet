@@ -1,0 +1,169 @@
+{
+    "meta_info": {
+        "range_from": 0,
+        "range_to": 19,
+        "total_count": 267
+    },
+    "cities": [
+        {
+            "id": "7967",
+            "name": "Biggera Waters",
+            "slug": "biggera-waters",
+            "lat": -27.9308,
+            "lon": 153.3961,
+            "country": "AU"
+        },
+        {
+            "id": "7969",
+            "name": "Southport",
+            "slug": "southport-7c4f9cbb-94c7-4cbd-88e3-15480097912a",
+            "lat": -27.973794,
+            "lon": 153.4183144,
+            "country": "AU"
+        },
+        {
+            "id": "7968",
+            "name": "Surfers Paradise",
+            "slug": "surfers-paradise",
+            "lat": -28,
+            "lon": 153.416667,
+            "country": "AU"
+        },
+        {
+            "id": "7908",
+            "name": "Woodlands",
+            "slug": "woodlands",
+            "lat": -28.0064121,
+            "lon": 153.3872416,
+            "country": "AU"
+        },
+        {
+            "id": "7956",
+            "name": "Nerang",
+            "slug": "nerang",
+            "lat": -27.995556,
+            "lon": 153.322222,
+            "country": "AU"
+        },
+        {
+            "id": "7966",
+            "name": "Broadbeach",
+            "slug": "broadbeach",
+            "lat": -28.030833,
+            "lon": 153.431944,
+            "country": "AU"
+        },
+        {
+            "id": "7971",
+            "name": "Robina",
+            "slug": "robina",
+            "lat": -28.066667,
+            "lon": 153.383333,
+            "country": "AU"
+        },
+        {
+            "id": "7957",
+            "name": "Stapylton",
+            "slug": "stapylton",
+            "lat": -27.730278,
+            "lon": 153.244444,
+            "country": "AU"
+        },
+        {
+            "id": "7960",
+            "name": "Loganholme",
+            "slug": "loganholme",
+            "lat": -27.684444,
+            "lon": 153.189722,
+            "country": "AU"
+        },
+        {
+            "id": "7948",
+            "name": "Coolangatta",
+            "slug": "coolangatta",
+            "lat": -28.1683,
+            "lon": 153.539,
+            "country": "AU"
+        },
+        {
+            "id": "7962",
+            "name": "Victoria Point",
+            "slug": "victoria-point",
+            "lat": -27.583333,
+            "lon": 153.3,
+            "country": "AU"
+        },
+        {
+            "id": "7953",
+            "name": "Tweed Heads",
+            "slug": "tweed-heads",
+            "lat": -28.1817,
+            "lon": 153.547,
+            "country": "AU"
+        },
+        {
+            "id": "7959",
+            "name": "Browns Plains",
+            "slug": "browns-plains",
+            "lat": -27.6620444,
+            "lon": 153.0530248,
+            "country": "AU"
+        },
+        {
+            "id": "7986",
+            "name": "Capalaba",
+            "slug": "capalaba",
+            "lat": -27.522994,
+            "lon": 153.1927,
+            "country": "AU"
+        },
+        {
+            "id": "7983",
+            "name": "Sunnybank",
+            "slug": "sunnybank",
+            "lat": -27.579,
+            "lon": 153.059,
+            "country": "AU"
+        },
+        {
+            "id": "7999",
+            "name": "Upper Mt Gravatt",
+            "slug": "upper-mt-gravatt",
+            "lat": -27.555278,
+            "lon": 153.079722,
+            "country": "AU"
+        },
+        {
+            "id": "7988",
+            "name": "Carindale",
+            "slug": "carindale",
+            "lat": -27.5094997,
+            "lon": 153.1148552,
+            "country": "AU"
+        },
+        {
+            "id": "7965",
+            "name": "Springfield Central",
+            "slug": "springfield-central",
+            "lat": -27.6853621,
+            "lon": 152.9058822,
+            "country": "AU"
+        },
+        {
+            "id": "7992",
+            "name": "New Farm",
+            "slug": "new-farm",
+            "lat": -27.468,
+            "lon": 153.048,
+            "country": "AU"
+        },
+        {
+            "id": "7982",
+            "name": "Graceville",
+            "slug": "graceville",
+            "lat": -27.520922,
+            "lon": 152.980912,
+            "country": "AU"
+        }
+    ]
+}

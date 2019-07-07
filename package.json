@@ -18,8 +18,12 @@
   },
   "homepage": "https://github.com/dan-garden/movie-meet#readme",
   "dependencies": {
+    "bcrypt": "^3.0.6",
+    "connect-mongo": "^3.0.0",
     "crypto": "^1.0.1",
     "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "mongoose": "^5.6.3",
     "node-fetch": "^2.6.0"
   }
 }

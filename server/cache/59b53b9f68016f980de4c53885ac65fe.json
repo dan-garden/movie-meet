@@ -1,0 +1,124 @@
+{
+    "cinemas": [
+        {
+            "id": "53730",
+            "slug": "reading-cinemas-biggera-waters",
+            "name": "Reading Harbourtown",
+            "chain_id": "58",
+            "telephone": "(07) 5500 9700",
+            "website": "http://readingcinemas.com.au/",
+            "location": {
+                "lat": -27.931927,
+                "lon": 153.3887423,
+                "address": {
+                    "display_text": "Gold Coast Hwy & Oxley drive, Biggera Waters QLD 4216, Australia",
+                    "street": "Gold Coast Highway",
+                    "house": null,
+                    "zipcode": "4216",
+                    "city": "Biggera Waters",
+                    "state": "Queensland",
+                    "state_abbr": "QLD",
+                    "country": "Australia",
+                    "country_code": "AU"
+                }
+            },
+            "booking_type": "external"
+        },
+        {
+            "id": "53732",
+            "slug": "bcc-cinemas-australia-fair-southport",
+            "name": "BCC Cinemas Australia Fair",
+            "chain_id": "53",
+            "telephone": "07 5571 2666",
+            "website": "https://www.eventcinemas.com.au/Cinema/Australia-Fair-Cinemas",
+            "location": {
+                "lat": -27.9688938,
+                "lon": 153.4150632,
+                "address": {
+                    "display_text": "Australia Fair Shopping Centre, 42 Marine Parade, Southport QLD 4215, Australia",
+                    "street": "Marine Parade",
+                    "house": "42",
+                    "zipcode": "4215",
+                    "city": "Southport",
+                    "state": "Queensland",
+                    "state_abbr": "QLD",
+                    "country": "Australia",
+                    "country_code": "AU"
+                }
+            },
+            "booking_type": "external"
+        },
+        {
+            "id": "53718",
+            "slug": "nerang-cineplex",
+            "name": "Nerang Cineplex",
+            "chain_id": "61",
+            "telephone": "(07) 5502 0222",
+            "website": "http://www.cineplex.com.au/",
+            "location": {
+                "lat": -27.992246,
+                "lon": 153.3359981,
+                "address": {
+                    "display_text": "52 Price St, Nerang QLD 4211, Australia",
+                    "street": "Price Street",
+                    "house": "52",
+                    "zipcode": "4211",
+                    "city": "Nerang",
+                    "state": "Queensland",
+                    "state_abbr": "QLD",
+                    "country": "Australia",
+                    "country_code": "AU"
+                }
+            },
+            "booking_type": "external"
+        },
+        {
+            "id": "53731",
+            "slug": "the-arts-centre-gold-coast-surfers-paradise",
+            "name": "The Arts Centre Gold Coast",
+            "chain_id": null,
+            "telephone": "(07) 5588 4000",
+            "website": "http://www.theartscentregc.com.au/",
+            "location": {
+                "lat": -28.001487,
+                "lon": 153.416248,
+                "address": {
+                    "display_text": "135 Bundall Rd, Surfers Paradise QLD 4217, Australia",
+                    "street": "Bundall Road",
+                    "house": "135",
+                    "zipcode": "4217",
+                    "city": "Surfers Paradise",
+                    "state": "Queensland",
+                    "state_abbr": "QLD",
+                    "country": "Australia",
+                    "country_code": "AU"
+                }
+            },
+            "booking_type": "external"
+        },
+        {
+            "id": "53729",
+            "slug": "event-cinemas-pacific-fair-broadbeach",
+            "name": "Event Cinemas Pacific Fair",
+            "chain_id": "53",
+            "telephone": "(07) 5504 1401",
+            "website": "https://www.eventcinemas.com.au/Cinema/Pacific-Fair",
+            "location": {
+                "lat": -28.0366881,
+                "lon": 153.4277523,
+                "address": {
+                    "display_text": "Hooker Blvd, Broadbeach QLD 4218, Australia",
+                    "street": "Hooker Boulevard",
+                    "house": null,
+                    "zipcode": "4218",
+                    "city": "Broadbeach",
+                    "state": "Queensland",
+                    "state_abbr": "QLD",
+                    "country": "Australia",
+                    "country_code": "AU"
+                }
+            },
+            "booking_type": "external"
+        }
+    ]
+}
