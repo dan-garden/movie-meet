@@ -25,7 +25,7 @@ db.once( 'open', function () {
 } );
 
 app.use( session( {
-    secret: 'work hard',
+    secret: 'this_is_shrecret_00382600',
     resave: true,
     saveUninitialized: false,
     store: new MongoStore( {

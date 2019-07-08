@@ -26,7 +26,12 @@ class Router {
                 config.params = [];
             }
             globalRoutes.push(config);
-            app[config.method](route, function(req, res) {
+
+            if(!config.middleware) {
+                config.middleware = (req, res, next) => next()
+            }
+
+            app[config.method](route, config.middleware, function(req, res) {
                 let funcParams = { session: req.session };
                 config.params.forEach(param => {
                     if(config.method === 'get') {
