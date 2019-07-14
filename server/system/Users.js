@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema( {
     },
     password: {
         type: String,
-        required: true,
+        required: true
     },
     first_name: {
         type: String,
@@ -22,7 +22,8 @@ const UserSchema = new mongoose.Schema( {
         type: String,
         required: false,
         trim: true
-    }
+    },
+    created_at: { type: Date, default: Date.now }
 } );
 
 
@@ -49,7 +50,31 @@ class Users {
                 } );
             }
 
-            if ( config.password !== config.passwordConfirm ) {
+            if ( !config.first_name || config.first_name.trim() === "" ) {
+                reject( {
+                    message: "First name is invalid"
+                } )
+            }
+
+            if ( !config.first_name.match( /^[0-9a-zA-Z]+$/ ) ) {
+                reject( {
+                    message: "First name must contain only letters and numbers"
+                } )
+            }
+
+            if ( !config.last_name || config.last_name.trim() === "" ) {
+                reject( {
+                    message: "Last name is invalid"
+                } )
+            }
+
+            if ( !config.last_name.match( /^[0-9a-zA-Z]+$/ ) ) {
+                reject( {
+                    message: "Last name must contain only letters and numbers"
+                } )
+            }
+
+            if ( config.password !== config.password_confirm ) {
                 reject( {
                     message: "Passwords don't match"
                 } )
@@ -70,6 +95,8 @@ class Users {
 
                     User.create( {
                         email: config.email,
+                        first_name: config.first_name,
+                        last_name: config.last_name,
                         password: config.password
                     }, ( error, user ) => {
                         if ( error ) {
@@ -93,45 +120,52 @@ class Users {
 
     static async postLogin( config = {} ) {
         return new Promise( ( resolve, reject ) => {
-            if ( !config.email || config.email.trim() === "" ) {
+            if ( config.session.userId ) {
                 reject( {
-                    message: "Email address is invalid"
-                } );
-            }
-
-            if ( !config.password || config.password === "" ) {
-                reject( {
-                    message: "Password is invalid"
-                } );
-            }
-
-            User.findOne( {
-                    email: config.email
+                    message: "Already logged in",
+                    redirect: "/profile"
                 } )
-                .exec( ( err, user ) => {
-                    if ( err ) {
-                        reject( {
-                            message: err
-                        } );
-                    } else if ( !user ) {
-                        reject( {
-                            message: "Password is invalid"
-                        } );
-                    }
-                    bcrypt.compare( config.password, user.password, ( err, result ) => {
-                        if ( result === true ) {
-                            config.session.userId = user._id;
-                            resolve( {
-                                redirect: "/profile",
-                                session: config.session
-                            } )
-                        } else {
+            } else {
+                if ( !config.email || config.email.trim() === "" ) {
+                    reject( {
+                        message: "Email address is invalid"
+                    } );
+                }
+
+                if ( !config.password || config.password === "" ) {
+                    reject( {
+                        message: "Password is invalid"
+                    } );
+                }
+
+                User.findOne( {
+                        email: config.email
+                    } )
+                    .exec( ( err, user ) => {
+                        if ( err ) {
+                            reject( {
+                                message: err
+                            } );
+                        } else if ( !user ) {
                             reject( {
                                 message: "Password is invalid"
                             } );
                         }
-                    } )
-                } );
+                        bcrypt.compare( config.password, user.password, ( err, result ) => {
+                            if ( result === true ) {
+                                config.session.userId = user._id;
+                                resolve( {
+                                    redirect: "/profile",
+                                    session: config.session
+                                } )
+                            } else {
+                                reject( {
+                                    message: "Password is invalid"
+                                } );
+                            }
+                        } )
+                    } );
+            }
         } )
     }
 
@@ -165,8 +199,10 @@ class Users {
                 function: this.postRegister.bind( this ),
                 params: [
                     'email',
+                    'first_name',
+                    'last_name',
                     'password',
-                    'passwordConfirm'
+                    'password_confirm'
                 ],
                 response: 'json',
             },

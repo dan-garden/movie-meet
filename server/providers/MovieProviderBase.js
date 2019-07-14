@@ -2,6 +2,21 @@ const fetch = require("node-fetch");
 const crypto = require('crypto');
 const fs = require("fs");
 
+const mongoose = require( 'mongoose' );
+
+const CacheSchema = new mongoose.Schema( {
+    _cache_id: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    content: {
+        type: Object
+    },
+    created_at: { type: Date, expires: '3d', default: Date.now }
+} );
+
+const Cache = mongoose.model( 'Cache', CacheSchema );
 
 
 class MovieProviderBase {
@@ -39,39 +54,69 @@ class MovieProviderBase {
         return hash;
     }
 
-    static getCacheFile(type, id) {
-        const cacheDir = "./server/cache/";
-        // const typeDir = path.basename(type.split("#")[0].split("?")[0]);
-        // if (!fs.existsSync(cacheDir + typeDir)) {
-        //     fs.mkdirSync(cacheDir + typeDir);
-        // }
-        // return cacheDir + typeDir + "/" + id + ".json";
-        return cacheDir + id + ".json";
-    }
+    // static getCacheFile(type, id) {
+    //     const cacheDir = "./server/cache/";
+    //     // const typeDir = path.basename(type.split("#")[0].split("?")[0]);
+    //     // if (!fs.existsSync(cacheDir + typeDir)) {
+    //     //     fs.mkdirSync(cacheDir + typeDir);
+    //     // }
+    //     // return cacheDir + typeDir + "/" + id + ".json";
+    //     return cacheDir + id + ".json";
+    // }
 
-    static setCache(url, headers, result) {
+    // static setCache(url, headers, result) {
+    //     if(result.status) {
+    //         delete result.status;
+    //     }
+    //     const id = this.getCacheId(url, headers);
+    //     fs.writeFileSync(this.getCacheFile(url, id), JSON.stringify(result, null, 4));
+        
+    //     return result;
+    // }
+
+    // static getCache(url, headers) {
+    //     const id = this.getCacheId(url, headers);
+    //     if (fs.existsSync(this.getCacheFile(url, id))) {
+    //         const result = fs.readFileSync(this.getCacheFile(url, id), "utf8");
+    //         return JSON.parse(result);
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
+    static async setCache(url, headers, result) {
         if(result.status) {
             delete result.status;
         }
-        const id = this.getCacheId(url, headers);
-        fs.writeFileSync(this.getCacheFile(url, id), JSON.stringify(result, null, 4));
-        
+
+        const cacheId = this.getCacheId(url, headers);
+        Cache.create( {
+            _cache_id: cacheId,
+            content: result
+        } );
+
         return result;
     }
 
-    static getCache(url, headers) {
-        const id = this.getCacheId(url, headers);
-        if (fs.existsSync(this.getCacheFile(url, id))) {
-            const result = fs.readFileSync(this.getCacheFile(url, id), "utf8");
-            return JSON.parse(result);
-        } else {
-            return false;
-        }
+    static async getCache(url, headers) {
+        return new Promise((resolve, reject) => {
+            const cacheId = this.getCacheId(url, headers);
+
+            Cache.findOne( {
+                _cache_id: cacheId
+            }, ).exec( ( err, cache ) => {
+                if ( cache ) {
+                    resolve(cache.content);
+                } else {
+                    resolve(false);
+                }
+            } );
+        })
     }
 
     static async getData(url, headers={}, cache=true) {
         if(cache) {
-            const cache = this.getCache(url, headers);
+            const cache = await this.getCache(url, headers);
             if(cache) {
                 return Promise.resolve(cache);
             }

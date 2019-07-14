@@ -5,6 +5,7 @@ class Router {
         if(type === 'json') {
             if(result.message || result.error) {
                 result.status = "error";
+                // console.error(result);
             } else {
                 result.status = "success";
             }
@@ -45,7 +46,7 @@ class Router {
                     Router.handleResponse(config.response, res, result);
                 })
                 .catch(e => {
-                    // console.error(e);
+                    console.error(e);
                     Router.handleResponse(config.response, res, { message: e.message })
                 });
             });

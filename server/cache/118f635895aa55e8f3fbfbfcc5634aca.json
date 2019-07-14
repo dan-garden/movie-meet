@@ -1,7 +1,0 @@
-{
-    "error": {
-        "code": 10006,
-        "user_message": null,
-        "debug_message": "missing `search_field` parameter together with `search_query`"
-    }
-}
