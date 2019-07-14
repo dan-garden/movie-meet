@@ -25,6 +25,7 @@ db.once( 'open', function () {
 
 app.use( session( {
     secret: 'this_is_shrecret_00382600',
+    cookie: { maxAge: 86400000 },
     resave: true,
     saveUninitialized: false,
     store: new MongoStore( {
