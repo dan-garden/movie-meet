@@ -46,7 +46,6 @@ class Router {
                     Router.handleResponse(config.response, res, result);
                 })
                 .catch(e => {
-                    console.error(e);
                     Router.handleResponse(config.response, res, { message: e.message })
                 });
             });
