@@ -43,6 +43,17 @@ Router.registerRoutes( app, {
 } );
 
 Router.registerRoutes( app, {
+    '/profile': {
+        method: 'get',
+        function: async () => __dirname + '/public/profile.html',
+        middleware: 'logged-in',
+        response: 'file'
+    }
+} )
+
+
+
+Router.registerRoutes( app, {
     '/api/endpoints': {
         method: 'get',
         function: () => {

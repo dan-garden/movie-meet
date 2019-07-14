@@ -10,13 +10,21 @@ class Router {
                 result.status = "success";
             }
             res.json(result);
-        } else if(type === 'dir') {
-    
+        } else if(type === 'file') {
+            res.sendFile(result);
         }
     }
 
     static get routes() {
         return globalRoutes;
+    }
+
+    static isLoggedIn(req, res, next) {
+        if ( req.session.userId ) {
+            return next();
+        } else {
+            res.redirect('/');
+        }
     }
 
     static registerRoutes(app, routes) {
@@ -30,6 +38,8 @@ class Router {
 
             if(!config.middleware) {
                 config.middleware = (req, res, next) => next()
+            } else if(config.middleware === "logged-in") {
+                config.middleware = this.isLoggedIn;
             }
 
             app[config.method](route, config.middleware, function(req, res) {
