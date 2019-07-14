@@ -12,8 +12,7 @@ app.use( bodyParser.urlencoded( {
     extended: false
 } ) );
 
-
-mongoose.connect('mongodb://localhost/movie-meet', {
+mongoose.connect('mongodb+srv://dan:Fredwarrior123@cluster0-e3g9k.mongodb.net/test?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useCreateIndex: true
 });

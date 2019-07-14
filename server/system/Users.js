@@ -148,22 +148,23 @@ class Users {
                             } );
                         } else if ( !user ) {
                             reject( {
-                                message: "Password is invalid"
+                                message: "Email address is invalid"
                             } );
+                        } else if( user ) {
+                            bcrypt.compare( config.password, user.password, ( err, result ) => {
+                                if ( result === true ) {
+                                    config.session.userId = user._id;
+                                    resolve( {
+                                        redirect: "/profile",
+                                        session: config.session
+                                    } )
+                                } else {
+                                    reject( {
+                                        message: "Password is invalid"
+                                    } );
+                                }
+                            } )
                         }
-                        bcrypt.compare( config.password, user.password, ( err, result ) => {
-                            if ( result === true ) {
-                                config.session.userId = user._id;
-                                resolve( {
-                                    redirect: "/profile",
-                                    session: config.session
-                                } )
-                            } else {
-                                reject( {
-                                    message: "Password is invalid"
-                                } );
-                            }
-                        } )
                     } );
             }
         } )
